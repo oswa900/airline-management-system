@@ -82,3 +82,44 @@
     -fx-alignment: CENTER_LEFT;
 }
 
+.tarjeta {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.1, 0, 2);
+}
+
+.tarjeta:hover {
+    -fx-background-color: #f4f4f4;
+}
+
+.tarjeta-seleccionada {
+    -fx-border-color: #0066cc;
+    -fx-border-width: 2;
+}
+
+
+.tarjeta-aeronave {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-cursor: hand;
+    -fx-pref-width: 160px;
+    -fx-pref-height: 200px;
+    -fx-alignment: center;
+}
+
+.tarjeta-aeronave:hover {
+    -fx-background-color: #b4b4b4;
+}
+
+.tarjeta-seleccionada {
+    -fx-border-color: #0078d4;
+    -fx-border-width: 2px;
+}
+
