@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.airlane.airlinemanagementsystem.controller.RegistroController"
+            styleClass="form-container"
+            prefWidth="450" prefHeight="420">
+
+    <VBox spacing="12" alignment="CENTER"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40">
+
+        <Label text="Registro de Cliente" styleClass="form-title"/>
+
+        <TextField fx:id="txtNombre" promptText="Nombre completo" styleClass="form-field"/>
+        <TextField fx:id="txtEmail" promptText="Correo electrónico" styleClass="form-field"/>
+        <TextField fx:id="txtTelefono" promptText="Teléfono" styleClass="form-field"/>
+        <TextField fx:id="txtUsuario" promptText="Nombre de usuario" styleClass="form-field"/>
+        <PasswordField fx:id="txtContrasena" promptText="Contraseña" styleClass="form-field"/>
+
+        <Label fx:id="lblMensaje" textFill="green" visible="false" wrapText="true" maxWidth="300"/>
+
+        <Button text="Registrarse" onAction="#registrarUsuario" styleClass="form-button"/>
+        <Button text="Volver" onAction="#volverAlLogin" styleClass="form-link"/>
+    </VBox>
+</AnchorPane>

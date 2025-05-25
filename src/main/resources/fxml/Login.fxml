@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.airlane.airlinemanagementsystem.controller.LoginController"
+            styleClass="form-container"
+            prefWidth="400" prefHeight="320">
+
+    <VBox spacing="12" alignment="CENTER"
+          AnchorPane.topAnchor="30" AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40">
+
+        <Label text="Inicio de Sesión" styleClass="form-title"/>
+
+        <TextField fx:id="txtUsuario" promptText="Usuario" styleClass="form-field"/>
+        <PasswordField fx:id="txtContrasena" promptText="Contraseña" styleClass="form-field"/>
+
+        <Label fx:id="lblError" textFill="red" visible="false" wrapText="true" maxWidth="280"/>
+
+        <Button text="Iniciar sesión" onAction="#iniciarSesion" styleClass="form-button"/>
+        <Button text="Registrarse" onAction="#abrirRegistro" styleClass="form-link"/>
+    </VBox>
+</AnchorPane>

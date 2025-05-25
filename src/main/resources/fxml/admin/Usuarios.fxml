@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.airlane.airlinemanagementsystem.controller.admin.UsuariosController"
+            prefWidth="1000" prefHeight="600"
+            styleClass="form-container">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10.0" padding="15.0" style="-fx-background-color: #007bff;">
+            <Label text="Gestión de Usuarios"
+                   style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="10.0" padding="20.0">
+            <TableView fx:id="tablaUsuarios" prefHeight="500">
+                <columns>
+                    <TableColumn text="ID" prefWidth="50" fx:id="colId"/>
+                    <TableColumn text="Usuario" prefWidth="200" fx:id="colUsername"/>
+                    <TableColumn text="Rol" prefWidth="150" fx:id="colRol"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="10">
+                <Button text="Actualizar" onAction="#cargarUsuarios" styleClass="form-button"/>
+                <Button text="Eliminar seleccionado" onAction="#eliminarUsuario" styleClass="form-button"/>
+            </HBox>
+
+            <Label fx:id="lblMensaje" style="-fx-text-fill: red;" />
+        </VBox>
+    </center>
+</BorderPane>
