@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="tarjetaRoot" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.airlane.airlinemanagementsystem.controller.component.TarjetaAeronaveController"
+      spacing="10" alignment="CENTER"
+      style="-fx-border-color: #ccc; -fx-border-radius: 5; -fx-padding: 15; -fx-background-color: white;"
+      styleClass="tarjeta-aeronave">
+
+    <ImageView fx:id="imagenAvion" fitWidth="150" fitHeight="100" preserveRatio="true"/>
+    <Label fx:id="lblModelo" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+    <Label fx:id="lblCapacidad"/>
+    <Label fx:id="lblEstado"/>
+
+</VBox>
+

@@ -5,13 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
+
 
 public class DashboardAdministradorController {
 
     @FXML
     private Button btnCerrarSesion; // Se enlaza con fx:id del FXML
+
+    @FXML
+    private StackPane panelCentro;
+
+
 
     @FXML
     public void cerrarSesion() {
@@ -42,9 +51,28 @@ public class DashboardAdministradorController {
     }
 
     @FXML
-    public void abrirVuelos() {
-        System.out.println("➡ Se presionó el botón 'Vuelos'.");
+    private void abrirAeronaves() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Aeronaves.fxml"));
+            Pane vista = loader.load();
+            panelCentro.getChildren().setAll(vista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    @FXML
+    private void abrirVuelos() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Vuelos.fxml"));
+            Parent vistaVuelos = loader.load();
+            panelCentro.getChildren().setAll(vistaVuelos); // panelCentro es el StackPane del centro
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @FXML
     public void abrirReportes() {

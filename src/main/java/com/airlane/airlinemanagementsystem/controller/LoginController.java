@@ -84,7 +84,9 @@ public class LoginController {
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Sistema de Aerolíneas");
-            stage.setMaximized(true);
+            stage.setWidth(1720);
+            stage.setHeight(880);
+            stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
