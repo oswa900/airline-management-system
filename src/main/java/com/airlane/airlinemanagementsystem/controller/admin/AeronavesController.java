@@ -14,6 +14,14 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.control.ScrollPane;
 
 import java.io.IOException;
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
 
 public class AeronavesController {
 
@@ -29,6 +37,7 @@ public class AeronavesController {
     private Aeronave seleccionada;
     private Node tarjetaSeleccionada = null;
     private TarjetaAeronaveController controllerSeleccionado = null;
+    private File imagenSeleccionada; // imagen elegida desde el sistema
 
     @FXML
     public void initialize() {
@@ -87,9 +96,10 @@ public class AeronavesController {
         try {
             int capacidad = Integer.parseInt(capacidadStr);
 
-            // Obtener el nombre de imagen en base al modelo
-            String nombreImagen = modelo.toLowerCase().replaceAll("[^a-z0-9]", "") + ".png";
-            String rutaImagen = "aeronaves/" + nombreImagen;
+            String rutaImagen = (imagenSeleccionada != null)
+                    ? copiarImagenAlProyecto(imagenSeleccionada, modelo)
+                    : "images/default.png";
+
 
             Aeronave nueva = new Aeronave(0, modelo, capacidad, estado, rutaImagen, "AUTO");
 
@@ -105,6 +115,55 @@ public class AeronavesController {
             mostrarMensaje("⚠ Capacidad inválida", "orange");
         }
     }
+
+
+
+    @FXML
+    public void seleccionarImagen() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen de aeronave");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File archivo = fileChooser.showOpenDialog(null);
+        if (archivo != null) {
+            imagenSeleccionada = archivo;
+            mostrarMensaje("✔ Imagen seleccionada: " + archivo.getName(), "green");
+        }
+    }
+
+    private String copiarImagenAlProyecto(File archivoOriginal, String modelo) {
+        // Limpiar el nombre del modelo para crear un nombre de archivo seguro
+        String nombreLimpio = modelo.toLowerCase().replaceAll("[^a-z0-9]", "_");
+
+        // Obtener extensión del archivo original
+        String extension = archivoOriginal.getName().substring(archivoOriginal.getName().lastIndexOf("."));
+
+        // Crear nombre único del archivo con timestamp
+        String nombreArchivo = nombreLimpio + "_" + System.currentTimeMillis() + extension;
+
+        // Definir ruta de destino dentro del proyecto
+        File destino = new File("src/main/resources/images/aeronaves/" + nombreArchivo);
+
+        try (FileInputStream in = new FileInputStream(archivoOriginal);
+             FileOutputStream out = new FileOutputStream(destino)) {
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+
+            // Devolver ruta relativa para guardar en la base de datos
+            return "images/aeronaves/" + nombreArchivo;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "images/default.png";
+        }
+    }
+
 
 
     @FXML
@@ -125,9 +184,15 @@ public class AeronavesController {
                 seleccionada.setCapacidad(capacidad);
                 seleccionada.setEstado(estado);
 
+                // Si el usuario seleccionó una nueva imagen, se copia y se actualiza
+                if (imagenSeleccionada != null) {
+                    String rutaImagen = copiarImagenAlProyecto(imagenSeleccionada, modelo);
+                    seleccionada.setImagen(rutaImagen);
+                }
+
                 if (aeronaveDAO.modificarAeronave(seleccionada)) {
                     cargarTarjetas();
-                    limpiarCampos();
+                    limpiarCampos(); // <-- Aquí se limpia imagenSeleccionada también
                     mostrarMensaje("✔ Aeronave modificada", "green");
                 } else {
                     mostrarMensaje("❌ No se pudo modificar", "red");
@@ -141,6 +206,8 @@ public class AeronavesController {
             mostrarMensaje("⚠ Seleccione una aeronave", "orange");
         }
     }
+
+
 
     @FXML
     public void eliminarAeronave() {
@@ -176,6 +243,8 @@ public class AeronavesController {
 
         tarjetaSeleccionada = null;
         controllerSeleccionado = null;
+        imagenSeleccionada = null;
+
     }
 
     private void mostrarMensaje(String mensaje, String color) {

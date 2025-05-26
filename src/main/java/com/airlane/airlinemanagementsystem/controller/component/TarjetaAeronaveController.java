@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-import java.util.function.Consumer;
+import java.io.File;
 
 public class TarjetaAeronaveController {
 
@@ -26,14 +26,17 @@ public class TarjetaAeronaveController {
         lblEstado.setText("Estado: " + aeronave.getEstado());
 
         try {
-            String ruta = "/images/" + (aeronave.getImagen() != null ? aeronave.getImagen() : "aeronaves/default.png");
-            Image imagen = new Image(getClass().getResourceAsStream(ruta));
-            imagenAvion.setImage(imagen);
-        } catch (Exception e) {
-            Image defaultImage = new Image(getClass().getResourceAsStream("/images/aeronaves/default.png"));
-            imagenAvion.setImage(defaultImage);
-        }
+            String rutaRelativa = aeronave.getImagen() != null ? aeronave.getImagen() : "images/aeronaves/default.png";
+            File archivoImagen = new File("src/main/resources/" + rutaRelativa);
 
+            if (archivoImagen.exists()) {
+                imagenAvion.setImage(new Image(archivoImagen.toURI().toString()));
+            } else {
+                imagenAvion.setImage(new Image(getClass().getResourceAsStream("/images/aeronaves/default.png")));
+            }
+        } catch (Exception e) {
+            imagenAvion.setImage(new Image(getClass().getResourceAsStream("/images/aeronaves/default.png")));
+        }
 
         tarjetaRoot.setOnMouseClicked(this::handleClick);
     }

@@ -56,7 +56,7 @@
                 <Button onAction="#modificarAeronave" styleClass="form-button" text="Modificar" />
                 <Button onAction="#eliminarAeronave" styleClass="form-button" text="Eliminar" />
                 <Button onAction="#limpiarCampos" styleClass="form-button" text="Limpiar" />
-
+                <Button text="Seleccionar Imagen" onAction="#seleccionarImagen"/>
             </HBox>
 
             <Label fx:id="lblMensaje" style="-fx-font-size: 13px;" />
