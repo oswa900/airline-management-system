@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.airlane.airlinemanagementsystem.controller.ReservasController"
+      spacing="10">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <!-- TÍTULO -->
+    <Label text="Gestión de Reservas" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+    <!-- BARRA DE BÚSQUEDA -->
+    <HBox spacing="10">
+        <TextField fx:id="busquedaField" promptText="Buscar por cliente, vuelo, asiento..." HBox.hgrow="ALWAYS"/>
+        <Button text="Limpiar" onAction="#limpiarBusqueda"/>
+    </HBox>
+
+    <!-- TABLA DE RESERVAS -->
+    <TableView fx:id="tablaReservas" prefHeight="200" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colCliente" text="Cliente" />
+            <TableColumn fx:id="colVuelo" text="Vuelo" />
+            <TableColumn fx:id="colAsiento" text="Asiento" />
+            <TableColumn fx:id="colEstado" text="Estado" />
+            <TableColumn fx:id="colFecha" text="Fecha de Reserva" />
+        </columns>
+    </TableView>
+
+    <!-- FORMULARIO DE RESERVA -->
+    <TitledPane text="Formulario de Reserva" expanded="true">
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox spacing="10">
+                <Label text="Cliente:" />
+                <ComboBox fx:id="comboCliente" promptText="Seleccionar cliente" prefWidth="200"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Vuelo:" />
+                <ComboBox fx:id="comboVuelo" promptText="Seleccionar vuelo" prefWidth="400" onAction="#cargarAsientosDisponibles"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Asiento:" />
+                <ComboBox fx:id="comboAsiento" promptText="Seleccionar asiento" prefWidth="150"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Estado:" />
+                <ComboBox fx:id="comboEstado" promptText="Seleccionar estado" prefWidth="150"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <!-- BOTONES -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Agregar" onAction="#agregarReserva"/>
+        <Button text="Editar" onAction="#editarReserva"/>
+        <Button text="Eliminar" onAction="#eliminarReserva"/>
+        <Button text="Limpiar Formulario" onAction="#limpiarFormulario"/>
+    </HBox>
+
+</VBox>

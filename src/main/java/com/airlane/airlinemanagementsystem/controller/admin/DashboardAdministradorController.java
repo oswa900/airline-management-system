@@ -46,14 +46,32 @@ public class DashboardAdministradorController {
     }
 
     @FXML
-    public void abrirUsuarios() {
-        System.out.println("➡ Se presionó el botón 'Usuarios'.");
+    private void abrirUsuarios() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Usuarios.fxml"));
+            Parent vista = loader.load();
+            panelCentro.getChildren().setAll(vista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     private void abrirAeronaves() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Aeronaves.fxml"));
+            Pane vista = loader.load();
+            panelCentro.getChildren().setAll(vista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void abrirReservas() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Reservas.fxml"));
             Pane vista = loader.load();
             panelCentro.getChildren().setAll(vista);
         } catch (IOException e) {
@@ -72,10 +90,10 @@ public class DashboardAdministradorController {
         }
     }
 
-
-
     @FXML
     public void abrirReportes() {
         System.out.println("➡ Se presionó el botón 'Reportes'.");
     }
+
+
 }

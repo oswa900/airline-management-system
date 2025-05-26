@@ -21,25 +21,51 @@
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
-            <TableView fx:id="tablaVuelos" prefHeight="400">
+            <!-- Tabla de vuelos -->
+            <TableView fx:id="tablaVuelos" prefHeight="300">
                 <columns>
                     <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
                     <TableColumn fx:id="colNumero" text="Número" prefWidth="100"/>
-                    <TableColumn fx:id="colOrigen" text="Origen" prefWidth="150"/>
-                    <TableColumn fx:id="colDestino" text="Destino" prefWidth="150"/>
-                    <TableColumn fx:id="colFechaSalida" text="Fecha Salida" prefWidth="140"/>
-                    <TableColumn fx:id="colFechaLlegada" text="Fecha Llegada" prefWidth="140"/>
+                    <TableColumn fx:id="colOrigen" text="Origen" prefWidth="120"/>
+                    <TableColumn fx:id="colDestino" text="Destino" prefWidth="120"/>
+                    <TableColumn fx:id="colFechaSalida" text="Fecha Salida" prefWidth="160"/>
+                    <TableColumn fx:id="colFechaLlegada" text="Fecha Llegada" prefWidth="160"/>
                 </columns>
             </TableView>
 
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Button text="Eliminar Vuelo"
-                        onAction="#eliminarVuelo"
-                        styleClass="form-button"/>
+            <!-- Formulario de entrada -->
+            <GridPane hgap="10" vgap="10">
+                <Label text="Número:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtNumero" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <Label fx:id="lblMensaje"
-                       style="-fx-font-size: 13px;"/>
+                <Label text="Origen:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <TextField fx:id="txtOrigen" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                <Label text="Destino:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtDestino" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Fecha Salida:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <DatePicker fx:id="dpFechaSalida" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                <Label text="Hora Salida (HH:mm):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtHoraSalida" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Fecha Llegada:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                <DatePicker fx:id="dpFechaLlegada" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                <Label text="Hora Llegada (HH:mm):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtHoraLlegada" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <!-- Botones -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button text="Agregar Vuelo" onAction="#agregarVuelo" styleClass="form-button"/>
+                <Button text="Modificar Vuelo" onAction="#modificarVuelo" styleClass="form-button"/>
+                <Button text="Eliminar Vuelo" onAction="#eliminarVuelo" styleClass="form-button"/>
+                <Button text="Limpiar" onAction="#limpiarCampos" styleClass="form-button"/>
+                <Label fx:id="lblMensaje" style="-fx-font-size: 13px;"/>
             </HBox>
         </VBox>
     </center>
+
 </BorderPane>
